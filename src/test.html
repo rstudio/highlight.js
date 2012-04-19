@@ -1789,7 +1789,7 @@ centre <- function(x, type, ...) {
 }
 
 myVar1
-myVar.2  # BUG: .2 should be part of identifier
+myVar.2
 data$x
 foo "bar" baz
 # test "test"
@@ -1800,7 +1800,7 @@ foo "bar" baz
 (0xabcdef1234567890) (123L) (1L)
 (0x10L) (10000000L) (1e6L) (1.1L)
 (1e-3L) (4123.381E-10i)
-(3.)  # BUG: 3. should be a number
+(3.) (3.i)
 
 "this is a quote that spans
 multiple lines
@@ -1824,7 +1824,7 @@ while, repeat, for, if, in, else, next, break,
 the quick brown fox jumped over the lazy dogs
 null na true false inf nan na_integer_ na_real_
 na_character_ na_complex_ Function While Repeat
-For If In Else Next Break .. .... "NULL" `NULL` 'NULL'
+For If In Else Next Break .. ..1.a "NULL" `NULL` 'NULL'
 
 # operators
 +, -, *, /, %%, ^, >, >=, <, <=, ==, !=, !, &, |, ~,

@@ -5,17 +5,6 @@ Author: Joe Cheng <joe@rstudio.org>
 
 hljs.LANGUAGES.r = {
   defaultMode: {
-    lexems: '[a-zA-Z.][a-zA-Z0-9._]*',
-    keywords: {
-      'keyword': {
-         'function' : 2, 'if' : 1, 'in' : 1, 'break' : 1, 'next' : 1, 'repeat' : 1, 'else' : 1, 'for' : 1,
-         'return' : 1, 'switch' : 1, 'while' : 1, 'try' : 1, 'tryCatch' : 10, 'stop' : 1, 'warning' : 1,
-         'require' : 1, 'library' : 10, 'attach' : 1, 'detach' : 1, 'source' : 1, 'setMethod' : 1,
-         'setGeneric' : 10, 'setGroupGeneric' : 10, 'setClass' : 1, '...' : 10
-      },
-      'literal': {'NULL': 1, 'NA': 10, 'TRUE': 1, 'FALSE': 1, 'T': 1, 'F': 1, 'Inf': 1, 'NaN': 1,
-                  'NA_integer_': 10, 'NA_real_': 10, 'NA_character_': 10, 'NA_complex_': 10}
-    },
     contains: [
       hljs.HASH_COMMENT_MODE,
 
@@ -34,6 +23,13 @@ hljs.LANGUAGES.r = {
         relevance: 0
       },
       {
+        // number with trailing decimal
+        className: 'number',
+        begin: "\\b\\d+\\.(?!\\d)(?:i\\b)?",
+        end: hljs.IMMEDIATE_RE,
+        relevance: 1
+      },
+      {
         // number
         className: 'number',
         begin: "\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",
@@ -48,12 +44,56 @@ hljs.LANGUAGES.r = {
         relevance: 1
       },
 
-      // {
-      //   className: 'identifier',
-      //   begin: "[a-zA-Z.][a-zA-Z0-9._]*\\b",
-      //   end: hljs.IMMEDIATE_RE,
-      //   relevance: 0
-      // },
+      {
+        className: 'keyword',
+        begin: "(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",
+        end: hljs.IMMEDIATE_RE,
+        relevance: 10
+      },
+      {
+        // ...
+        className: 'keyword',
+        begin: "\\.\\.\\.",
+        end: hljs.IMMEDIATE_RE,
+        relevance: 10
+      },
+      {
+        // ..1, ..2, etc.
+        className: 'keyword',
+        begin: "\\.\\.\\d+(?![\\w.])",
+        end: hljs.IMMEDIATE_RE,
+        relevance: 10
+      },
+      {
+        className: 'keyword',
+        begin: "\\b(?:function)",
+        end: hljs.IMMEDIATE_RE,
+        relevance: 2
+      },
+      {
+        className: 'keyword',
+        begin: "(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",
+        end: hljs.IMMEDIATE_RE,
+        relevance: 1
+      },
+      {
+        className: 'literal',
+        begin: "(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",
+        end: hljs.IMMEDIATE_RE,
+        relevance: 10
+      },
+      {
+        className: 'literal',
+        begin: "(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",
+        end: hljs.IMMEDIATE_RE,
+        relevance: 1
+      },
+      {
+        className: 'identifier',
+        begin: "[a-zA-Z.][a-zA-Z0-9._]*\\b",
+        end: hljs.IMMEDIATE_RE,
+        relevance: 0
+      },
 
       {
         // high relevance for common R case of non-numeric assignment
