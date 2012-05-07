@@ -51,7 +51,7 @@ var hljs = new function() {
     classes = classes.concat(block.parentNode.className.split(/\s+/));
     for (var i = 0; i < classes.length; i++) {
       var class_ = classes[i].replace(/^language-/, '');
-      if (languages[class_] || class_ == 'no-highlight') {
+      if (languages[class_]) {
         return class_;
       }
     }
@@ -491,13 +491,10 @@ var hljs = new function() {
     var text = blockText(block, useBR);
     var language = blockLanguage(block);
     var result, pre;
-    if (language == 'no-highlight')
-        return;
     if (language) {
       result = highlight(language, text);
-    } else {
-      result = highlightAuto(text);
-      language = result.language;
+    } else { 
+      return;
     }
     var original = nodeStream(block);
     if (original.length) {
