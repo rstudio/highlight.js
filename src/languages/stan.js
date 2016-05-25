@@ -20,9 +20,17 @@ hljs.LANGUAGES.stan = {
       // Operators
       {
         className: 'operator',
-        begin: "(?:\\(|\\[|\\{|\\)|\\}|\\]|T(?=\\s*\\[)|<-|~|\\|\\||&&|==|!=|<=?|>=?|\\+|-|\\.?/|\\\\|\\^|\\^|!|'|%|:|,|;|=)\\b",
+        begin: "(?:<-|~|\\|\\||&&|==|!=|<=?|>=?|\\+|-|\\.?/|\\\\|\\^|\\^|!|'|%|:|,|;|=)\\b",
         end: hljs.IMMEDIATE_RE,
         relevance: 10
+      },
+
+      // Parens
+      {
+        className: 'paren',
+        begin: '[[({\\])}]',
+        end: hljs.IMMEDIATE_RE,
+        relevance: 0
       },
 
       // Stan Keywords ----
